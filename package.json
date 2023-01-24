@@ -1,0 +1,7 @@
+{
+  "dependencies": {
+    "@iconscout/react-unicons": "^1.1.6",
+    "bootstrap": "^5.2.3",
+    "react-credit-cards": "^0.8.3"
+  }
+}
