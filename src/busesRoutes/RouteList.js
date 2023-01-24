@@ -1,24 +1,24 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import "./Bus.css"
+import "./Route.css"
 
-const BusList= () => {
+const RouteList= () => {
     const [empdata, empdatachange] = useState(null);
     const navigate = useNavigate();
 
     // const LoadDetail = (id) => {
-    //     navigate("/admin/bus" + id);
+    //     navigate("/routes" + id);
     // }
     const LoadEdit = (id) => {
-        navigate("/bus/edit/" + id);
+        navigate("/routes/edit/");
     }
     const Removefunction = (id) => {
-        if (window.confirm('Do you want to remove this Bus?')) {
-            fetch("/buses/" + id, {
+        if (window.confirm('Do you want to remove the route?')) {
+            fetch("/routes/" + id, {
                 method: "DELETE"
             }).then((res) => {
                 alert('Removed successfully.')
-                window.location.reload();
+                navigate("/admin/routes")
             }).catch((err) => {
                 console.log(err.message)
             })
@@ -29,7 +29,7 @@ const BusList= () => {
 
 
     useEffect(() => {
-        fetch("/buses").then((res) => {
+        fetch("/routes").then((res) => {
             return res.json();
         }).then((resp) => {
             empdatachange(resp);
@@ -41,21 +41,23 @@ const BusList= () => {
         <div className="container">
             <div className="card">
                 <div className="card-title">
-                    <h2 style={{color:"black"}}>Buses</h2>
+                    <h2 style={{color:"black"}}>Routes</h2>
                 </div>
                 <div className="card-body">
                     <div className="divbtn">
-                        <Link to="/admin/bus/new" className="btn btn-success">Add New (+)</Link>
+                        <Link to="/admin/route/new" className="btn btn-success">Add New (+)</Link>
                     </div>
                     <table className="table table-bordered">
                         <thead className="bg-dark text-white">
                             <tr>
                                 <td>ID</td>
-                                <td>image</td>
+                                <td>Pick-Up</td>
+                                <td>Destination</td>
                                 <td>Bus No</td>
-                                <td>Fleet No</td>
-                                <td>Actions</td>
-                              
+                                <td>Date</td>
+                                <td>Time</td>
+                                <td>Amount</td>
+                                <td>Action</td>
                             </tr>
                         </thead>
                         <tbody>
@@ -64,12 +66,14 @@ const BusList= () => {
                                 empdata.map(item => (
                                     <tr key={item.id}>
                                         <td>{item.id}</td>
-                                        <td>{ <img style ={{ width: "70px",height:" 30px"}} src={item.image} alt={item.number_plate} />}</td>
-                                        <td>{item.number_plate}</td>
-                                        <td>{item.fleet_no}</td>
-                                      
-                                        <td><Link to="/admin/bus/edit" onClick={() => { LoadEdit(item.id) }} className="btn btn-success">Edit</Link>
-                                            <Link to="/admin/bus" onClick={() => { Removefunction(item.id) }} className="btn btn-danger">Remove</Link>
+                                        <td>{item.from}</td>
+                                        <td>{item.to}</td>
+                                        <td>{item.busnumber}</td>
+                                        <td>{item.date}</td>
+                                        <td>{item.time}</td>
+                                        <td>{item.cost}</td>
+                                        <td><Link to="/admin/route/edit" onClick={() => { LoadEdit(item.id) }} className="btn btn-success">Edit</Link>
+                                            <Link to="/admin/routes" onClick={() => { Removefunction(item.id) }} className="btn btn-danger">Remove</Link>
                                           
                                         </td>
                                     </tr>
@@ -85,4 +89,4 @@ const BusList= () => {
     );
 }
 
-export default BusList;
+export default RouteList;
