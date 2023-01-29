@@ -48,7 +48,7 @@ export default function SeatSelection() {
         localStorage.setItem("reservedSeats", JSON.stringify(seatNumber))
         localStorage.setItem("nameData", JSON.stringify(name))
         alert('Seat Confirmed.')
-        navigate ("/payment")
+        navigate("/payment")
 
       
     }

@@ -1,7 +1,7 @@
 import React from "react";
 import Card from "react-credit-cards";
 import "./PaymentTab.css";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import {
   formatCreditCardNumber,
@@ -74,8 +74,8 @@ export default class App extends React.Component {
   moveToTicketPage = (e) => {
     e.preventDefault();
     localStorage.setItem("paymentData", JSON.stringify(this.state.token));
-    window.alert('Payment Confirmed.')
-    window.location="/ticket"
+    window.alert('Payment Confirmed, Click ticket to view your ticket')
+    // window.location="/ticket"
   };
 
   renderNamesOfPassenger = () => {
@@ -200,12 +200,14 @@ export default class App extends React.Component {
                 </div>{" "}
                 <input type="hidden" name="issuer" value={issuer} />{" "}
                 <div className="">
+                  <Link to="/ticket">
                   <button
                     onClick={(e) => this.moveToTicketPage(e)}
                     className="btn btn-light btCustom"
                   >
                     PAY{" "}
                   </button>{" "}
+                  </Link>
                 </div>{" "}
               </form>{" "}
             </div>{" "}
