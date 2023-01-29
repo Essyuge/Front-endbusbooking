@@ -60,5 +60,11 @@
   "devDependencies": {
     "flow-babel-webpack-plugin": "^1.1.1",
     "flow-bin": ">=0.44.2 <1"
+  },
+  "engines": {
+    "npm": ">=8.7.0"
+  },
+  "overrides": {
+    "react": "$react"
   }
 }
